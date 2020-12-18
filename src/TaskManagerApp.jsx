@@ -2,8 +2,9 @@ import React from 'react';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Navbar from './components/Navbar/Navbar';
+import Navbar from './components/Navbar';
 import Login from './components/Login';
+import Registry from './components/Registry';
 import Footer from './components/Footer';
 
 // Por mientras
@@ -24,7 +25,7 @@ const TaskManagerApp = () => {
                 </Route>
 
                 <Route exact path="/registrar">
-                    Registrar
+                    <Registry />
                 </Route>
             </Switch>
 
