@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+
+import { auth } from '../../firebase';
 
 import useForm from '../../hooks/useForm';
 
 import './Login.scss';
 
-const Login = () => {
+const Login = ({ history }) => {
 
     const [{ email, password }, handleInputChange, handleInputReset] = useForm({
         email: '',
@@ -17,15 +19,30 @@ const Login = () => {
         e.preventDefault();
 
         // Validar campos
-        if (!email.trim()) return toast.error('📧 El Email es obligatorio!');
-        if (!password.trim()) return toast.error('🔑 La Contraseña es obligatoria!');
+        if (!email.trim()) return toast.error('📧 El Email es obligatorio');
+        if (!password.trim()) return toast.error('🔑 La Contraseña es obligatoria');
 
         // Enviar Formulario
-        console.info("I'm in");
-
-        // Resetear Formulario
-        handleInputReset();
+        ingresar(email.trim(), password.trim());
     };
+
+    const ingresar = useCallback(async (email, password) => {
+
+        try {
+
+            await auth.signInWithEmailAndPassword(email, password);
+
+            handleInputReset();
+
+            history.push('/tareas');
+        } catch (error) {
+
+            if (error.code === 'auth/user-not-found') return toast.error('🧾 Usuario o 🔑 Contraseña Incorrecta');
+            if (error.code === 'auth/wrong-password') return toast.error('🧾 Usuario o 🔑 Contraseña Incorrecta');
+
+        }
+
+    }, [history, handleInputReset]);
 
     return (
         <div className="login form-usuario">
@@ -93,4 +110,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default withRouter(Login);
