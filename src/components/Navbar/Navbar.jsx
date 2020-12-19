@@ -1,14 +1,20 @@
 import React from 'react';
+import { Link, NavLink, withRouter } from 'react-router-dom';
 
-import { Link, NavLink } from 'react-router-dom';
+import { auth } from '../../firebase';
 
 import Logo from '../../assets/images/logo.svg';
 
 import './Navbar.scss';
 
-const Navbar = () => {
+const Navbar = ({ firebaseUser, history }) => {
 
-    const isLogin = false;
+    const cerrarSesion = () => {
+        auth.signOut()
+            .then(() => {
+                history.push('/');
+            });
+    };
 
     return (
         <header className="navbar-custom navbar navbar-dark bg-dark" >
@@ -18,18 +24,19 @@ const Navbar = () => {
                 </Link>
 
                 <div className="d-flex">
-                    {!isLogin ?
+                    {!firebaseUser ?
                         (
-                            < NavLink to="/ingresar" className="btn_ btn-dark m-0" >Ingresar</NavLink>
+                            <NavLink to="/ingresar" className="btn_ btn-dark m-0" >Ingresar</NavLink>
                         )
                         :
                         (
                             <>
-                                <button className="button" >
-                                    Crear tarea
-                                </button>
+                                <NavLink to="/tareas" className="btn_ btn-dark m-0 ml-5 mr-3">Tareas</NavLink>
 
-                                <button className="button">
+                                <button
+                                    className="btn_ btn-dark m-0"
+                                    onClick={cerrarSesion}
+                                >
                                     Cerrar Sesión
                                </button>
                             </>
@@ -41,4 +48,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default withRouter(Navbar);

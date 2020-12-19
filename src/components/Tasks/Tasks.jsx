@@ -1,6 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { withRouter } from 'react-router-dom';
 
-const Tasks = () => {
+import { auth } from '../../firebase';
+
+import './Tasks.scss';
+
+const Tasks = ({ history }) => {
+
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        (auth.currentUser) ? setUser(auth.currentUser) : history.push('/');
+    }, [history]);
+
     return (
         <>
             <main>
@@ -91,4 +103,4 @@ const Tasks = () => {
     );
 };
 
-export default Tasks;
+export default withRouter(Tasks);

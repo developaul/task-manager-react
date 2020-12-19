@@ -1,19 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import { auth } from './firebase';
 
 import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Registry from './components/Registry';
 import Footer from './components/Footer';
-
-// Por mientras
 import Tasks from './components/Tasks';
 
 const TaskManagerApp = () => {
-    return (
+
+    const [firebaseUser, setFirebaseUser] = useState(false);
+
+    useEffect(() => {
+        auth.onAuthStateChanged(user => user ? setFirebaseUser(user) : setFirebaseUser(null));
+    }, []);
+
+    return firebaseUser !== false ? (
         <Router>
-            <Navbar />
+            <Navbar firebaseUser={firebaseUser} />
 
             <Switch>
                 <Route exact path="/">
@@ -35,7 +42,7 @@ const TaskManagerApp = () => {
 
             <Footer />
         </Router>
-    );
+    ) : <div>Cargando....</div>;
 };
 
 export default TaskManagerApp;
