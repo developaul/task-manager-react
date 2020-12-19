@@ -17,7 +17,7 @@ const TaskManagerApp = () => {
 
             <Switch>
                 <Route exact path="/">
-                    <Tasks />
+                    Inicio
                 </Route>
 
                 <Route exact path="/ingresar">
@@ -26,6 +26,10 @@ const TaskManagerApp = () => {
 
                 <Route exact path="/registrar">
                     <Registry />
+                </Route>
+
+                <Route exact path="/tareas">
+                    <Tasks />
                 </Route>
             </Switch>
 
