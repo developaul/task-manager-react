@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link, withRouter } from 'react-router-dom';
+import moment from 'moment';
 
 import { auth, db } from '../../firebase';
 
@@ -43,7 +44,7 @@ const Registry = ({ history }) => {
             await db.collection('users').doc(res.user.uid).set({
                 nombre,
                 email,
-                fecha: Date.now()
+                fecha: moment().format('DD/MM/YYYY')
             });
 
             handleInputReset();
