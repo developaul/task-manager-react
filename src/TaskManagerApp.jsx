@@ -24,7 +24,7 @@ const TaskManagerApp = () => {
 
             <Switch>
                 <Route exact path="/">
-                    Inicio
+                    Home Landing...
                 </Route>
 
                 <Route exact path="/ingresar">

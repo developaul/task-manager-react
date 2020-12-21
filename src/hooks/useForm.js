@@ -15,7 +15,9 @@ const useForm = initialState => {
 
     const handleInputReset = () => setvalues(initialState);
 
-    return [values, handleInputChange, handleInputReset];
+    const handleInputEdit = newState => setvalues(newState);
+
+    return [values, handleInputChange, handleInputReset, handleInputEdit];
 };
 
 export default useForm;
