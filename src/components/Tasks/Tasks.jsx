@@ -12,6 +12,8 @@ import { calculateDeadLineTask, calculateDeadLineTaskInverse } from '../../helpe
 
 import Task from '../Task';
 
+import Create from '../../assets/images/create.svg';
+
 import './Tasks.scss';
 
 const Tasks = ({ history }) => {
@@ -103,6 +105,7 @@ const Tasks = ({ history }) => {
                 className="button d-flex mx-auto mt-5"
                 onClick={() => setShowAside(true)}
             >
+                <img src={Create} alt="nuevo" className="mr-1" />
                 Nueva Tarea
             </button>
 

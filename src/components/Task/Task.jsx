@@ -2,6 +2,9 @@ import React from 'react'
 
 import moment from 'moment';
 
+import Delete from '../../assets/images/delete.svg';
+import Edit from '../../assets/images/edit.svg';
+
 import './Task.scss';
 
 const Task = ({ task, editTask, deleteTask }) => {
@@ -25,14 +28,14 @@ const Task = ({ task, editTask, deleteTask }) => {
                         className="btn btn-outline-warning"
                         onClick={() => editTask(task)}
                     >
-                        ?
+                        <img src={Edit} alt="Editar" />
                     </button>
 
                     <button
                         className="btn btn-outline-danger ml-2"
                         onClick={() => deleteTask(id)}
                     >
-                        X
+                        <img src={Delete} alt="Eliminar" />
                     </button>
                 </div>
             </div>
