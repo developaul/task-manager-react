@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { auth } from './firebase';
 
 import Navbar from './components/Navbar';
+import Home from './components/Home';
 import Login from './components/Login';
 import Registry from './components/Registry';
 import Footer from './components/Footer';
@@ -24,7 +25,7 @@ const TaskManagerApp = () => {
 
             <Switch>
                 <Route exact path="/">
-                    Home Landing...
+                    <Home />
                 </Route>
 
                 <Route exact path="/ingresar">
