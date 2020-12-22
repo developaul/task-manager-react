@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { Spinner } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { auth } from './firebase';
@@ -43,7 +43,7 @@ const TaskManagerApp = () => {
 
             <Footer />
         </Router>
-    ) : <div>Cargando....</div>;
+    ) : <Spinner className="spinner" animation="grow" />
 };
 
 export default TaskManagerApp;

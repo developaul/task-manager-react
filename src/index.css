@@ -367,3 +367,14 @@ aside {
     background-color: rgb(230, 78, 78);
     color: var(--blanco);
 }
+
+.spinner {
+    width: 8rem;
+    height: 8rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
