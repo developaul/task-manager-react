@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import { auth } from './firebase';
 
@@ -8,12 +8,14 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Login from './components/Login';
 import Registry from './components/Registry';
+import Recover from './components/Recover'
 import Footer from './components/Footer';
 import Tasks from './components/Tasks';
 
 const TaskManagerApp = () => {
 
     const [firebaseUser, setFirebaseUser] = useState(false);
+    const [firebaseRecover, setFirebaseRecover] = useState(false);
 
     useEffect(() => {
         auth.onAuthStateChanged(user => user ? setFirebaseUser(user) : setFirebaseUser(null));
@@ -29,16 +31,25 @@ const TaskManagerApp = () => {
                 </Route>
 
                 <Route exact path="/ingresar">
-                    <Login />
+                    <Login
+                        firebaseRecover={firebaseRecover}
+                        setFirebaseRecover={setFirebaseRecover}
+                    />
                 </Route>
 
                 <Route exact path="/registrar">
                     <Registry />
                 </Route>
 
+                <Route exact path="/recuperar">
+                    <Recover setFirebaseRecover={setFirebaseRecover} />
+                </Route>
+
                 <Route exact path="/tareas">
                     <Tasks />
                 </Route>
+
+                <Redirect to="/" />
             </Switch>
 
             <Footer />

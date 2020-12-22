@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import { Link, withRouter } from 'react-router-dom';
 
@@ -8,12 +8,19 @@ import useForm from '../../hooks/useForm';
 
 import './Login.scss';
 
-const Login = ({ history }) => {
+const Login = ({ history, firebaseRecover, setFirebaseRecover }) => {
 
     const [{ email, password }, handleInputChange, handleInputReset] = useForm({
         email: '',
         password: ''
     });
+
+    useEffect(() => {
+        if (firebaseRecover) {
+            toast.success('📧 Email enviado')
+            setFirebaseRecover(false);
+        }
+    }, [firebaseRecover, setFirebaseRecover]);
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -86,6 +93,13 @@ const Login = ({ history }) => {
                         />
                     </div>
                 </form>
+
+                <Link
+                    className="enlace-cuenta"
+                    to="/recuperar"
+                >
+                    ¿Olvidaste tu contraseña?
+                </Link>
 
                 <Link
                     className="enlace-cuenta"
